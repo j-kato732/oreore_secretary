@@ -2,6 +2,18 @@ import gradio as gr
 import random
 import time
 
+
+def get_current_weather(location, unit="fahrenheit"):
+    """Get the current weather in a given location"""
+    weather_info = {
+        "location": location,
+        "temperature": "72",
+        "unit": unit,
+        "forecast": ["sunny", "windy"],
+    }
+    return json.dumps(weather_info)
+
+
 with gr.Blocks() as demo:
     chatbot = gr.Chatbot()
     msg = gr.Textbox()
@@ -11,7 +23,8 @@ with gr.Blocks() as demo:
         return "", history + [[user_message, None]]
 
     def bot(history):
-        bot_message = random.choice(["How are you?", "I love you", "I'm very hungry"])
+        bot_message = random.choice(
+            ["How are you?", "I love you", "I'm very hungry"])
         history[-1][1] = ""
         for character in bot_message:
             history[-1][1] += character
