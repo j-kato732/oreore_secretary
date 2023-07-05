@@ -46,11 +46,14 @@ def chat(history):
     )
     gpt_message = response['choices'][0]["message"]["content"]
 
-    history[-1][1] = ""
-    for character in gpt_message:
-        history[-1][1] += character
-        time.sleep(0.05)
-        yield history
+    history[-1][1] = gpt_message
+    return history
+
+    # history[-1][1] = ""
+    # for character in gpt_message:
+    #     history[-1][1] += character
+    #     time.sleep(0.05)
+    #     yield history
 
 
 with gr.Blocks() as demo:
