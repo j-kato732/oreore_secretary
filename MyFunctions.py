@@ -4,19 +4,25 @@ from LLMmanager import LLMmanager
 
 
 class MyFunctions:
-    @LLMmanager.register_function(
-        description="Get the current weather in a given location",
-        parameters={
-            "type": "object",
-            "properties": {
-                "location": {"type": "string", "description": "The city and state, e.g. San Francisco, CA"},
-                "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
-            },
-            "required": ["location"],
-        }
-    )
+    @LLMmanager.register_function
     def get_current_weather(self, location, unit="fahrenheit"):
-        """Get the current weather in a given location"""
+        '''
+        {
+            "description": "Get the current weather in a given location",
+            "parameters": {
+                "type": "object",
+                "properties": {
+                    "location": {
+                        "type": "string",
+                        "description": "The city and state, e.g. San Francisco, CA"
+                    },
+                    "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]}
+                },
+                "required": ["location"]
+            }
+        }
+        '''
+
         weather_info = {
             "location": location,
             "temperature": "72",
