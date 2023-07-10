@@ -3,8 +3,7 @@ import json
 from LLMmanager import LLMmanager
 
 
-class MyFunctions:
-    @LLMmanager.register_function
+class MyFunctions(metaclass=LLMmanager):
     def get_current_weather(self, location, unit="fahrenheit"):
         '''
         {

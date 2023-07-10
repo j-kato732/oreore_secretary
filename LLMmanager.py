@@ -1,16 +1,14 @@
 import json
 
 
-class LLMmanager:
+class LLMmanager(type):
     functions = []
 
-    @staticmethod
-    def register_function(func):
-        def _register_decolate(*args, **kwargs):
-            function_name = {"name": func.__name__}
-            function_info = json.loads(func.__doc__)
-            function_name.update(function_info)
-            LLMmanager.functions.append(function_name)
-
-            return func(*args, **kwargs)
-        return _register_decolate
+    def __new__(cls, name, bases, attrs):
+        for key, value in attrs.items():
+            if callable(value):
+                function_info = {"name": key}
+                function_doc = json.loads(value.__doc__)
+                function_info.update(function_doc)
+                cls.functions.append(function_info)
+        return super().__new__(cls, name, bases, attrs)
