@@ -4,7 +4,8 @@ from LLMmanager import LLMmanager
 
 
 class MyFunctions(metaclass=LLMmanager):
-    def get_current_weather(self, location, unit="fahrenheit"):
+    @staticmethod
+    def get_current_weather(location, unit="fahrenheit"):
         '''
         {
             "description": "Get the current weather in a given location",
@@ -37,3 +38,8 @@ print(info)
 
 # 関数のメタデータを取得
 print(LLMmanager.functions)
+
+get_current_weather = LLMmanager.callable_functions["get_current_weather"]
+print(get_current_weather("San Francisco, CA"))
+
+print(LLMmanager.callable_functions)
